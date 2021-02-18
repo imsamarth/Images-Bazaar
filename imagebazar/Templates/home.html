@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>My Image Bazaar</title>
+      <style>
+
+
+          .bg{
+          background:#3f51b5!important;
+          }
+
+          .list-group-item.active{
+          background:#3f51b5!important;
+          border-color:#3f51b5!important;
+          }
+
+      </style>
+  </head>
+  <body style="background-color:#D3D3D3">
+
+  {%include 'navbar.html' %}
+
+<div class="container">
+<!--  MAin Code-->
+
+  <div class="row mt-3">
+
+      <div class="col-md-2">
+
+<!--          Categories-->
+          <div class="list-group mt-3">
+  <a href="/home" class="list-group-item list-group-item-action active">
+    All Images
+  </a>
+
+              {% for c in cats %}
+  <a href="/category/{{c.pk}}" class="list-group-item list-group-item-action">{{c.title}}</a>
+               {% endfor %}
+</div>
+
+      </div>
+
+      <div class="col-md-10">
+
+<!--          Images-->
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="card-columns">
+                      {% for i in images %}
+
+                      <div class="card" >
+  <img class="card-img-top" src="/media/{{i.image}}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{i.title}}</h5>
+    <p class="card-text">{{i.description}}</p>
+    <a href="#" class="btn btn-primary" onclick="showModalwithImage('{{i.image}}')">View</a>
+  </div>
+</div>
+
+                       {% endfor %}
+                  </div>
+              </div>
+          </div>
+
+      </div>
+
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal" id="image-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">My Image Bazar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-centre">
+        <img src="#" id="image-show" class="img-fluid" alt="">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+        function showModalwithImage(imageUrl){
+        $('#image-modal').modal('show')
+        $("#image-show").attr('src',`/media/${imageUrl}`)
+        }
+    </script>
+  </body>
+</html>
